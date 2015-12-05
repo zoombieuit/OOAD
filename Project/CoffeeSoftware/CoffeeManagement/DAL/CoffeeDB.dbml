@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeDB" Class="CoffeeDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-IKI1I9Q;Initial Catalog=CoffeeDB;Integrated Security=True" SettingsObjectName="CoffeeManagement.Properties.Settings" SettingsPropertyName="CoffeeDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BAN" Member="BANs">
+    <Type Name="BAN">
+      <Column Name="ID_Ban" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten_Ban" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Trang_Thai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Khu_Vuc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="KHU_VUC_BAN" Member="KHU_VUC" ThisKey="ID_Khu_Vuc" OtherKey="ID_Khu_Vuc" Type="KHU_VUC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KHU_VUC" Member="KHU_VUCs">
+    <Type Name="KHU_VUC">
+      <Column Name="ID_Khu_Vuc" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten_Khu_Vuc" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="KHU_VUC_BAN" Member="BANs" ThisKey="ID_Khu_Vuc" OtherKey="ID_Khu_Vuc" Type="BAN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MON" Member="MONs">
+    <Type Name="MON">
+      <Column Name="ID_Mon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten_Mon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ID_Loai_Mon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Don_Gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Hinh_Anh" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="LOAI_MON_MON" Member="LOAI_MON" ThisKey="ID_Loai_Mon" OtherKey="ID_Loai_Mon" Type="LOAI_MON" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NGUYEN_LIEU" Member="NGUYEN_LIEUs">
+    <Type Name="NGUYEN_LIEU">
+      <Column Name="ID_Nguyen_Lieu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten_Nguyen_Lieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="So_Luong_Ton" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOAI_MON" Member="LOAI_MONs">
+    <Type Name="LOAI_MON">
+      <Column Name="ID_Loai_Mon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten_Loai_Mon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="LOAI_MON_MON" Member="MONs" ThisKey="ID_Loai_Mon" OtherKey="ID_Loai_Mon" Type="MON" />
+    </Type>
+  </Table>
+</Database>
